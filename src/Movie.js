@@ -8,9 +8,10 @@ import CardMedia from "@mui/material/CardMedia";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-
+import { useNavigate } from "react-router-dom";
 export default function Movie({ movieTake }) {
   const [show, setShow] = useState(0);
+  const navigate = useNavigate();
   return (
     <Card sx={{ maxWidth: 345 }} className="movie-container">
       <CardMedia
@@ -32,7 +33,7 @@ export default function Movie({ movieTake }) {
               <ExpandMoreIcon fontSize="large" />
             )}
           </IconButton>
-          <IconButton color="primary" aria-label="movie-info">
+          <IconButton color="primary" aria-label="movie-info" onClick={() => navigate(`/portal/view/${movieTake.id}`)}>
             <InfoIcon fontSize="medium" />
           </IconButton>
         </h2>

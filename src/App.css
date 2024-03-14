@@ -1,13 +1,8 @@
-* {
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+*{
     padding: 0;
     margin: 0;
 }
-body {
-    background-color: rgb(196, 223, 247);
-}
+
 .form {
     text-align: center;
     display: flex;
@@ -49,4 +44,10 @@ a, Link {
 .movie-list{
     display: flex;
     flex-wrap: wrap;
+}
+
+.home{
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }

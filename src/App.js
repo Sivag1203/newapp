@@ -6,6 +6,7 @@ import Home from "./Home";
 import Portal from "./Portal";
 import NotFound from "./NotFound";
 import MovieList from "./MovieList";
+import MovieDetail from "./MovieDetail";
 import "./app.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 // import CssBaseline from "@mui/material/CssBaseline";
@@ -28,10 +29,14 @@ function App() {
           <Routes>
             <Route path="/register" element={<Register />} />
             <Route path="/" element={<Login />} />
-            <Route path="/portal" element={<Portal />}>
+            <Route
+              path="/portal"
+              element={<Portal mode={mode} setMode={setMode} />}
+            >
               <Route path="home" element={<Home />} />
               <Route path="addmovie" element={<Addmovie />} />
               <Route path="movie" element={<MovieList />}></Route>
+              <Route path="view/:id" element={<MovieDetail />}></Route>
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
