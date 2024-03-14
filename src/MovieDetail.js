@@ -16,7 +16,8 @@ export default function MovieDetail() {
   }, [id]);
 
   //   console.log(movie);
-  const ratingStyle = { color: movie.rating >= 8.5 ? "green" : "red" };
+  const ratingStyle = { color: movie.rating >= 8.5 ? "limegreen" : "red" ,
+};
   return (
     <div>
       <iframe
@@ -31,7 +32,7 @@ export default function MovieDetail() {
       <div className="movie-detail-container">
         <div className="movie-spec">
           <h2 className="movie-name">{movie.name}</h2>
-          <h3 style={ratingStyle} className="movie-rating">
+          <h3 style={ ratingStyle } className="movie-rating">
             {movie.rating}🔥
           </h3>
         </div>

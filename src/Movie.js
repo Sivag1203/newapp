@@ -9,9 +9,12 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { useNavigate } from "react-router-dom";
+import EditIcon from '@mui/icons-material/Edit';
 export default function Movie({ movieTake }) {
   const [show, setShow] = useState(0);
   const navigate = useNavigate();
+  const ratingStyle = { color: movieTake.rating >= 8.5 ? "limegreen" : "red" ,
+};
   return (
     <Card sx={{ maxWidth: 345 }} className="movie-container">
       <CardMedia
@@ -37,11 +40,14 @@ export default function Movie({ movieTake }) {
             <InfoIcon fontSize="medium" />
           </IconButton>
         </h2>
-        <h3 className="movie-rating">{movieTake.rating}🔥</h3>
+        <h3 style={ ratingStyle } className="movie-rating">{movieTake.rating}🔥</h3>
       </CardContent>
       {show ? <p className="movie-summary">{movieTake.summary}</p> : null}
       <CardActions>
         <Counter />
+        <IconButton sx={{marginLeft:"auto"}} aria-label="editMovie" onClick={()=> navigate(`/portal/edit/${movieTake.id}`)}>
+          <EditIcon color="secondary"></EditIcon>
+        </IconButton>
       </CardActions>
     </Card>
   );
