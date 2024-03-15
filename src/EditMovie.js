@@ -13,7 +13,7 @@ export default function EditMovie() {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    fetch(`https://65f16b8e034bdbecc7627150.mockapi.io/movie/${id}`, {
+    fetch(`https://backend-khaki-one.vercel.app/getone/${id}`, {
       method: "GET",
     })
       .then((data) => data.json())
@@ -47,7 +47,7 @@ function Editform({ movie }) {
     },
   });
   const editmovie = (editedvalues) => {
-    fetch(`https://65f16b8e034bdbecc7627150.mockapi.io/movie/${movie.id}`, {
+    fetch(`https://backend-khaki-one.vercel.app/update/${movie._id}`, {
       method: "PUT",
       body: JSON.stringify(editedvalues),
       headers: {

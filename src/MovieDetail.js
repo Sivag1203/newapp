@@ -8,7 +8,7 @@ export default function MovieDetail() {
   const [movie, setMovie] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`https://65f16b8e034bdbecc7627150.mockapi.io/movie/${id}`, {
+    fetch(`https://backend-khaki-one.vercel.app/getone/${id}`, {
       method: "GET",
     })
       .then((data) => data.json())

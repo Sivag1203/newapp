@@ -13,7 +13,7 @@ export default function MovieList() {
   const getMovies = async () => {
     try {
       const response = await fetch(
-        "https://65f16b8e034bdbecc7627150.mockapi.io/movie"
+        "https://backend-khaki-one.vercel.app/get"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch data");

@@ -11,16 +11,15 @@ import CardContent from "@mui/material/CardContent";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-export default function Movie({ movieTake ,getMovies}) {
+export default function Movie({ movieTake, getMovies }) {
   const [show, setShow] = useState(0);
   const navigate = useNavigate();
   const ratingStyle = { color: movieTake.rating >= 8.5 ? "limegreen" : "red" };
 
   const deleteMovie = (id) => {
-    fetch(`https://65f16b8e034bdbecc7627150.mockapi.io/movie/${id}`, {
+    fetch(`https://backend-khaki-one.vercel.app/delete/${id}`, {
       method: "DELETE",
-    })
-    .then(() => getMovies())
+    }).then(() => getMovies());
   };
   return (
     <Card sx={{ maxWidth: 345 }} className="movie-container">
@@ -46,7 +45,7 @@ export default function Movie({ movieTake ,getMovies}) {
           <IconButton
             color="primary"
             aria-label="movie-info"
-            onClick={() => navigate(`/portal/view/${movieTake.id}`)}
+            onClick={() => navigate(`/portal/view/${movieTake._id}`)}
           >
             <InfoIcon fontSize="medium" />
           </IconButton>
@@ -61,14 +60,14 @@ export default function Movie({ movieTake ,getMovies}) {
         <IconButton
           sx={{ marginLeft: "auto" }}
           aria-label="editMovie"
-          onClick={() => navigate(`/portal/edit/${movieTake.id}`)}
+          onClick={() => navigate(`/portal/edit/${movieTake._id}`)}
         >
           <EditIcon color="secondary"></EditIcon>
         </IconButton>
         <IconButton sx={{ marginLeft: "auto" }} aria-label="editMovie">
           <DeleteForeverIcon
             color="secondary"
-            onClick={() => deleteMovie(movieTake.id)}
+            onClick={() => deleteMovie(movieTake._id)}
           ></DeleteForeverIcon>
         </IconButton>
       </CardActions>
