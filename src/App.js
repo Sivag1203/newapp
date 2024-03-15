@@ -8,7 +8,7 @@ import NotFound from "./NotFound";
 import MovieList from "./MovieList";
 import MovieDetail from "./MovieDetail";
 import EditMovie from "./EditMovie";
-import "./app.css";
+import "./App.css";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 // import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
