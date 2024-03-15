@@ -33,7 +33,7 @@ export default function MovieList() {
     <div className="movie-list">
       {movies.map((mov) => (
         <div key={mov.id}>
-          <Movie movieTake={mov} />
+          <Movie movieTake={mov} getMovies={getMovies}/>
         </div>
       ))}
     </div>

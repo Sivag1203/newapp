@@ -9,12 +9,19 @@ import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import { useNavigate } from "react-router-dom";
-import EditIcon from '@mui/icons-material/Edit';
-export default function Movie({ movieTake }) {
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+export default function Movie({ movieTake ,getMovies}) {
   const [show, setShow] = useState(0);
   const navigate = useNavigate();
-  const ratingStyle = { color: movieTake.rating >= 8.5 ? "limegreen" : "red" ,
-};
+  const ratingStyle = { color: movieTake.rating >= 8.5 ? "limegreen" : "red" };
+
+  const deleteMovie = (id) => {
+    fetch(`https://65f16b8e034bdbecc7627150.mockapi.io/movie/${id}`, {
+      method: "DELETE",
+    })
+    .then(() => getMovies())
+  };
   return (
     <Card sx={{ maxWidth: 345 }} className="movie-container">
       <CardMedia
@@ -36,17 +43,33 @@ export default function Movie({ movieTake }) {
               <ExpandMoreIcon fontSize="large" />
             )}
           </IconButton>
-          <IconButton color="primary" aria-label="movie-info" onClick={() => navigate(`/portal/view/${movieTake.id}`)}>
+          <IconButton
+            color="primary"
+            aria-label="movie-info"
+            onClick={() => navigate(`/portal/view/${movieTake.id}`)}
+          >
             <InfoIcon fontSize="medium" />
           </IconButton>
         </h2>
-        <h3 style={ ratingStyle } className="movie-rating">{movieTake.rating}🔥</h3>
+        <h3 style={ratingStyle} className="movie-rating">
+          {movieTake.rating}🔥
+        </h3>
       </CardContent>
       {show ? <p className="movie-summary">{movieTake.summary}</p> : null}
       <CardActions>
         <Counter />
-        <IconButton sx={{marginLeft:"auto"}} aria-label="editMovie" onClick={()=> navigate(`/portal/edit/${movieTake.id}`)}>
+        <IconButton
+          sx={{ marginLeft: "auto" }}
+          aria-label="editMovie"
+          onClick={() => navigate(`/portal/edit/${movieTake.id}`)}
+        >
           <EditIcon color="secondary"></EditIcon>
+        </IconButton>
+        <IconButton sx={{ marginLeft: "auto" }} aria-label="editMovie">
+          <DeleteForeverIcon
+            color="secondary"
+            onClick={() => deleteMovie(movieTake.id)}
+          ></DeleteForeverIcon>
         </IconButton>
       </CardActions>
     </Card>

@@ -4,27 +4,28 @@ import { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useFormik } from "formik";
-import Addmovie from "./Addmovie";
+// import Addmovie from "./Addmovie";
 import * as yup from "yup";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 export default function EditMovie() {
   const { id } = useParams();
   const [movie, setMovie] = useState([]);
-  const [show,setShow]  =   useState(false);
-  //   const navigate = useNavigate();
+  const [show, setShow] = useState(false);
+
   useEffect(() => {
     fetch(`https://65f16b8e034bdbecc7627150.mockapi.io/movie/${id}`, {
       method: "GET",
     })
       .then((data) => data.json())
       .then((mv) => setMovie(mv))
-      .then(()=>setShow(true))
+      .then(() => setShow(true));
   }, [id]);
 
-  return <div>{ show ? <Editform movie={movie} /> : "Loading..."}</div>;
+  return <div>{show ? <Editform movie={movie} /> : "Loading..."}</div>;
 }
 
 function Editform({ movie }) {
+  const navigate = useNavigate();
   const movieValidationSchema = yup.object().shape({
     name: yup.string().required("Name is required"),
     poster: yup.string().required("Poster is required").min(10).url(),
@@ -41,10 +42,19 @@ function Editform({ movie }) {
       summary: movie.summary,
     },
     validationSchema: movieValidationSchema,
-    onSubmit: (values) => {
-      Addmovie(values);
+    onSubmit: (editedvalues) => {
+      editmovie(editedvalues);
     },
   });
+  const editmovie = (editedvalues) => {
+    fetch(`https://65f16b8e034bdbecc7627150.mockapi.io/movie/${movie.id}`, {
+      method: "PUT",
+      body: JSON.stringify(editedvalues),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(() => navigate("/portal/movie"));
+  };
   return (
     <div>
       <form className="form" onSubmit={formik.handleSubmit}>
@@ -64,6 +74,7 @@ function Editform({ movie }) {
               : null
           }
         />
+        
 
         <TextField
           id="outlined-basic"
