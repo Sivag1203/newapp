@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Movie from "./Movie";
+import { api } from "./Golbal";
 
 export default function MovieList() {
   const [movies, setMovies] = React.useState([]);
@@ -13,7 +14,7 @@ export default function MovieList() {
   const getMovies = async () => {
     try {
       const response = await fetch(
-        "https://backend-khaki-one.vercel.app/get"
+        `${api}/get`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch data");

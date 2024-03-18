@@ -11,13 +11,14 @@ import CardContent from "@mui/material/CardContent";
 import { useNavigate } from "react-router-dom";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import { api } from "./Golbal";
 export default function Movie({ movieTake, getMovies }) {
   const [show, setShow] = useState(0);
   const navigate = useNavigate();
   const ratingStyle = { color: movieTake.rating >= 8.5 ? "limegreen" : "red" };
 
   const deleteMovie = (id) => {
-    fetch(`https://backend-khaki-one.vercel.app/delete/${id}`, {
+    fetch(`${api}/delete/${id}`, {
       method: "DELETE",
     }).then(() => getMovies());
   };

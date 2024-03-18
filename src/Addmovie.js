@@ -4,6 +4,9 @@ import Button from "@mui/material/Button";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { api } from "./Golbal";
+
+
 export default function Addmovie() {
   const movieValidationSchema = yup.object().shape({
     name: yup.string().required("Name is required"),
@@ -28,7 +31,7 @@ export default function Addmovie() {
 const navigate = useNavigate();
 
 const addmovie = (values) => {
-  fetch("https://backend-khaki-one.vercel.app/post", {
+  fetch(`${api}/post`, {
     method: "POST",
     body: JSON.stringify(values),
     headers: {

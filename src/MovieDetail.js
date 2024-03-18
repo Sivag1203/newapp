@@ -3,12 +3,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { api } from "./Golbal";
 export default function MovieDetail() {
   const { id } = useParams();
   const [movie, setMovie] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
-    fetch(`https://backend-khaki-one.vercel.app/getone/${id}`, {
+    fetch(`${api}/getone/${id}`, {
       method: "GET",
     })
       .then((data) => data.json())

@@ -7,13 +7,14 @@ import { useFormik } from "formik";
 // import Addmovie from "./Addmovie";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { api } from "./Golbal";
 export default function EditMovie() {
   const { id } = useParams();
   const [movie, setMovie] = useState([]);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    fetch(`https://backend-khaki-one.vercel.app/getone/${id}`, {
+    fetch(`${api}/getone/${id}`, {
       method: "GET",
     })
       .then((data) => data.json())
@@ -47,7 +48,7 @@ function Editform({ movie }) {
     },
   });
   const editmovie = (editedvalues) => {
-    fetch(`https://backend-khaki-one.vercel.app/update/${movie._id}`, {
+    fetch(`${api}/update/${movie._id}`, {
       method: "PUT",
       body: JSON.stringify(editedvalues),
       headers: {
